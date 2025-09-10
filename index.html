@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Digitonica PORTFOLIO</title>
+  <title>Awan Electronics</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -10,34 +10,31 @@
       background: #fff;
     }
     img {
-      width: 100%;      /* force full width */
-      height: auto;     /* keep aspect ratio */
-      display: block;   /* remove inline gaps */
+      width: 100%;      /* full width */
+      height: auto;     /* keep ratio */
+      display: block;   /* remove gaps */
     }
   </style>
 </head>
 <body>
   <script>
     function loadImages() {
-      let i = 1;
-
-      function tryLoad() {
+      let maxTry = 50; // maximum images to check
+      for (let i = 1; i <= maxTry; i++) {
         let img = new Image();
         img.src = "images/image (" + i + ").png";
         img.loading = "lazy";
 
         img.onload = function() {
           document.body.appendChild(img);
-          i++;
-          tryLoad(); // try next image
         };
 
         img.onerror = function() {
-          // stop when image doesn't exist
+          // stop further attempts if an image is missing
+          // prevents empty images after last one
+          maxTry = i - 1;
         };
       }
-
-      tryLoad();
     }
 
     loadImages();
